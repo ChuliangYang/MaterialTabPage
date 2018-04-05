@@ -20,10 +20,6 @@ class CityAdapter(val context: Context,val cityBeanList: List<CityBean>?) : Recy
         if (holder is CityHolder ){
             holder.apply {
                 cityBeanList?.let {
-//                    tv_city.text = it[position].getCity()
-//                    tv_state.text = it[position].getState()
-//                    tv_population.text = it[position].getPopulation()
-
                     tv_city.text = it[position].city
                     tv_state.text = it[position].state
                     tv_population.text = it[position].population
