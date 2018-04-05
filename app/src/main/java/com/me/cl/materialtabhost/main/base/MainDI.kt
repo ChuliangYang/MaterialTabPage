@@ -2,7 +2,7 @@ package com.me.cl.materialtabhost.main.base
 
 import android.content.Context
 import com.me.cl.materialtabhost.GIST_HOST
-import com.me.cl.materialtabhost.main.MainActivityRx
+import com.me.cl.materialtabhost.main.MainActivityMVP
 import com.me.cl.materialtabhost.main.MainInteractorImpl
 import com.me.cl.materialtabhost.main.MainPresenterImpl
 import dagger.Component
@@ -18,11 +18,11 @@ import javax.inject.Scope
 @Component(modules = arrayOf(MainModule::class))
 @ActivityScope
 interface MainComponent {
-    fun inject(mainActivity: MainActivityRx)
+    fun inject(mainActivity: MainActivityMVP)
 }
 
 @Module
-class MainModule(val activity: MainActivityRx) {
+class MainModule(val activity: MainActivityMVP) {
 
     @Provides
     fun provideMainPresenter(mainPresenterImpl: MainPresenterImpl): MainPresenter {

@@ -28,7 +28,7 @@ import com.trello.rxlifecycle2.LifecycleProvider
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
-class MainActivityRx : AppCompatActivity(), MainView {
+class MainActivityMVP : AppCompatActivity(), MainView {
 
     var mtitlebar: Toolbar? = null
     var mtabLayout: TabLayout? = null
@@ -125,6 +125,11 @@ class MainActivityRx : AppCompatActivity(), MainView {
             presenter.saveState(it)
             StateSaver.saveInstanceState(this, it)
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter.destroy()
     }
 
 }
