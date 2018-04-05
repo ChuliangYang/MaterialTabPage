@@ -24,7 +24,6 @@ class CityAdapter(val context: Context,val cityBeanList: List<CityBean>?) : Recy
                     tv_state.text = it[position].state
                     tv_population.text = it[position].population
                 }
-
             }
 
         }

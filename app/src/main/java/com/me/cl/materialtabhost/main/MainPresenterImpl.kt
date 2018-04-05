@@ -14,6 +14,7 @@ import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class MainPresenterImpl @Inject constructor(val interactor: MainInteractor) : MainPresenter {
+
     var view: MainView? = null
     var provider: LifecycleProvider<Lifecycle.Event>? = null
 
@@ -21,15 +22,14 @@ class MainPresenterImpl @Inject constructor(val interactor: MainInteractor) : Ma
         this.provider = provider
         if (interactor.restoreFromState(savedInstanceState)) {
             view?.bindToViewPager(mutableListOf<List<CityBean>>().apply {
-
                 interactor.getState(STATE_RV_MODEL_0)?.let {
-                    add(interactor.getState(STATE_RV_MODEL_0) as List<CityBean>)
+                    add(it as List<CityBean>)
                 } ?: apply {
                     add(arrayListOf())
                 }
 
-                interactor.getState(STATE_RV_MODEL_0)?.let {
-                    add(interactor.getState(STATE_RV_MODEL_1) as List<CityBean>)
+                interactor.getState(STATE_RV_MODEL_1)?.let {
+                    add(it as List<CityBean>)
                 } ?: apply {
                     add(arrayListOf())
                 }
@@ -55,6 +55,7 @@ class MainPresenterImpl @Inject constructor(val interactor: MainInteractor) : Ma
 
     override fun destroy() {
         interactor.release()
+        view = null
     }
 
 }

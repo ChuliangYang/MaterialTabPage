@@ -60,6 +60,32 @@ class MainActivityMVP : AppCompatActivity(), MainView {
         presenter.init(provider, savedInstanceState)
     }
 
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+        outState?.let {
+            mvpCityList?.childCount?.let {
+                for (i in 0 until it) {
+                    val child = mvpCityList?.getChildAt(i)
+                    if (child is RecyclerView) {
+                        val state = child.layoutManager.onSaveInstanceState()
+                        if (child.getTag() == 0) {
+                            rv_state0 = state
+                        } else if (child.getTag() == 1) {
+                            rv_state1 = state
+                        }
+                    }
+                }
+            }
+            presenter.saveState(it)
+            StateSaver.saveInstanceState(this, it)
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter.destroy()
+    }
+
     override fun bindToViewPager(twoList: List<List<CityBean>>) {
         mvpCityList?.adapter = object : PagerAdapter() {
             override fun instantiateItem(container: ViewGroup, position: Int): Any {
@@ -105,31 +131,4 @@ class MainActivityMVP : AppCompatActivity(), MainView {
             }
         }
     }
-
-    override fun onSaveInstanceState(outState: Bundle?) {
-        super.onSaveInstanceState(outState)
-        outState?.let {
-            mvpCityList?.childCount?.let {
-                for (i in 0 until it) {
-                    val child = mvpCityList?.getChildAt(i)
-                    if (child is RecyclerView) {
-                        val state = child.layoutManager.onSaveInstanceState()
-                        if (child.getTag() == 0) {
-                            rv_state0 = state
-                        } else if (child.getTag() == 1) {
-                            rv_state1 = state
-                        }
-                    }
-                }
-            }
-            presenter.saveState(it)
-            StateSaver.saveInstanceState(this, it)
-        }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        presenter.destroy()
-    }
-
 }

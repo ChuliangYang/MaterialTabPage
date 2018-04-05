@@ -14,7 +14,6 @@ import kotlin.collections.HashMap
 class MainInteractorImpl @Inject constructor(val context: Context, val retrofit: Retrofit) : MainInteractor {
 
     val stateCache = HashMap<String, Any?>()
-    val KEY_WHOLE_STATE = "KEY_WHOLE_STATE"
 
     override fun fetchCityList(): Observable<List<CityBean>> {
         return retrofit.create(GistService::class.java).getCityListRx().toObservable()

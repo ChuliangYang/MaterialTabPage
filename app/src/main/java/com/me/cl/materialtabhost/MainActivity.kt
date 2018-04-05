@@ -86,6 +86,27 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+        outState?.let {
+            vp?.childCount?.let {
+                for (i in 0 until it) {
+                    val child = vp?.getChildAt(i)
+                    if (child is RecyclerView) {
+                        val state = child.layoutManager.onSaveInstanceState()
+                        if (child.getTag() == 0) {
+                            rv_state0 = state
+                        } else if (child.getTag() == 1) {
+                            rv_state1 = state
+                        }
+                    }
+                }
+            }
+
+            StateSaver.saveInstanceState(this, it)
+        }
+    }
+
     private fun configViewPager() {
         vp?.adapter = object : PagerAdapter() {
             override fun instantiateItem(container: ViewGroup, position: Int): Any {
@@ -129,27 +150,6 @@ class MainActivity : AppCompatActivity() {
             override fun getCount(): Int {
                 return 2
             }
-        }
-    }
-
-    override fun onSaveInstanceState(outState: Bundle?) {
-        super.onSaveInstanceState(outState)
-        outState?.let {
-            vp?.childCount?.let {
-                for (i in 0 until it) {
-                    val child = vp?.getChildAt(i)
-                    if (child is RecyclerView) {
-                        val state = child.layoutManager.onSaveInstanceState()
-                        if (child.getTag() == 0) {
-                            rv_state0 = state
-                        } else if (child.getTag() == 1) {
-                            rv_state1 = state
-                        }
-                    }
-                }
-            }
-
-            StateSaver.saveInstanceState(this, it)
         }
     }
 }
