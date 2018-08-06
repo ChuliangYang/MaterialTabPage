@@ -1,4 +1,4 @@
-package com.me.cl.materialtabhost.main
+package com.me.cl.materialtabhost.MVP
 
 import android.arch.lifecycle.Lifecycle
 import android.os.Bundle
@@ -19,10 +19,10 @@ import com.evernote.android.state.StateSaver
 import com.me.cl.materialtabhost.R
 import com.me.cl.materialtabhost.adapter.CityAdapter
 import com.me.cl.materialtabhost.bean.CityBean
-import com.me.cl.materialtabhost.main.base.DaggerMainComponent
-import com.me.cl.materialtabhost.main.base.MainModule
-import com.me.cl.materialtabhost.main.base.MainPresenter
-import com.me.cl.materialtabhost.main.base.MainView
+import com.me.cl.materialtabhost.MVP.base.DaggerMainComponent
+import com.me.cl.materialtabhost.MVP.base.MainModule
+import com.me.cl.materialtabhost.MVP.base.MainPresenter
+import com.me.cl.materialtabhost.MVP.base.MainView
 import com.trello.lifecycle2.android.lifecycle.AndroidLifecycle
 import com.trello.rxlifecycle2.LifecycleProvider
 import kotlinx.android.synthetic.main.activity_main.*

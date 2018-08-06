@@ -1,10 +1,10 @@
-package com.me.cl.materialtabhost.main
+package com.me.cl.materialtabhost.MVP
 
 import android.content.Context
 import android.os.Bundle
 import com.me.cl.materialtabhost.api.GistService
 import com.me.cl.materialtabhost.bean.CityBean
-import com.me.cl.materialtabhost.main.base.MainInteractor
+import com.me.cl.materialtabhost.MVP.base.MainInteractor
 import io.reactivex.Observable
 import retrofit2.Retrofit
 import java.util.*

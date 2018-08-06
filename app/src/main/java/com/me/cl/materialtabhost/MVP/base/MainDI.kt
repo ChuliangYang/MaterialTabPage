@@ -1,10 +1,10 @@
-package com.me.cl.materialtabhost.main.base
+package com.me.cl.materialtabhost.MVP.base
 
 import android.content.Context
 import com.me.cl.materialtabhost.GIST_HOST
-import com.me.cl.materialtabhost.main.MainActivityMVP
-import com.me.cl.materialtabhost.main.MainInteractorImpl
-import com.me.cl.materialtabhost.main.MainPresenterImpl
+import com.me.cl.materialtabhost.MVP.MainActivityMVP
+import com.me.cl.materialtabhost.MVP.MainInteractorImpl
+import com.me.cl.materialtabhost.MVP.MainPresenterImpl
 import dagger.Component
 import dagger.Module
 import dagger.Provides

@@ -1,13 +1,13 @@
-package com.me.cl.materialtabhost.main
+package com.me.cl.materialtabhost.MVP
 
 import android.arch.lifecycle.Lifecycle
 import android.os.Bundle
 import com.me.cl.materialtabhost.bean.CityBean
-import com.me.cl.materialtabhost.main.MainInteractorImpl.Companion.STATE_RV_MODEL_0
-import com.me.cl.materialtabhost.main.MainInteractorImpl.Companion.STATE_RV_MODEL_1
-import com.me.cl.materialtabhost.main.base.MainInteractor
-import com.me.cl.materialtabhost.main.base.MainPresenter
-import com.me.cl.materialtabhost.main.base.MainView
+import com.me.cl.materialtabhost.MVP.MainInteractorImpl.Companion.STATE_RV_MODEL_0
+import com.me.cl.materialtabhost.MVP.MainInteractorImpl.Companion.STATE_RV_MODEL_1
+import com.me.cl.materialtabhost.MVP.base.MainInteractor
+import com.me.cl.materialtabhost.MVP.base.MainPresenter
+import com.me.cl.materialtabhost.MVP.base.MainView
 import com.trello.rxlifecycle2.LifecycleProvider
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers

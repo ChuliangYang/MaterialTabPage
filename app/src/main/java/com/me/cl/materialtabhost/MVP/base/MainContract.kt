@@ -1,4 +1,4 @@
-package com.me.cl.materialtabhost.main.base
+package com.me.cl.materialtabhost.MVP.base
 
 import android.arch.lifecycle.Lifecycle
 import android.os.Bundle
