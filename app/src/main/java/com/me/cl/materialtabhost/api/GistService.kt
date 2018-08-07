@@ -1,6 +1,6 @@
 package com.me.cl.materialtabhost.api
 
-import com.me.cl.materialtabhost.bean.CityBean
+import com.me.cl.materialtabhost.bean.entities.City
 import io.reactivex.Single
 import retrofit2.Call
 import retrofit2.http.GET
@@ -8,8 +8,8 @@ import retrofit2.http.GET
 interface GistService {
 
     @GET("c1f004cb7f447ee5ccd6433bcb56d5af/raw/df3a570c9a0976e43b799be96da59186fc918ea7/CityList.json")
-    fun getCityList():Call<List<CityBean>>
+    fun getCityList():Call<List<City>>
 
     @GET("c1f004cb7f447ee5ccd6433bcb56d5af/raw/df3a570c9a0976e43b799be96da59186fc918ea7/CityList.json")
-    fun getCityListRx(): Single<List<CityBean>>
+    fun getCityListRx(): Single<List<City>>
 }

@@ -15,7 +15,7 @@ import com.evernote.android.state.State
 import com.evernote.android.state.StateSaver
 import com.me.cl.materialtabhost.adapter.CityAdapter
 import com.me.cl.materialtabhost.api.GistService
-import com.me.cl.materialtabhost.bean.CityBean
+import com.me.cl.materialtabhost.bean.entities.City
 import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -27,14 +27,14 @@ import retrofit2.converter.gson.GsonConverterFactory
 class  MainActivity : AppCompatActivity() {
 
     @State
-    var listOne: ArrayList<CityBean> = ArrayList()
+    var listOne: ArrayList<City> = ArrayList()
     //            by lazy {
-//        mutableListOf<CityBean>()
+//        mutableListOf<City>()
 //    }
     @State
-    var listTwo: ArrayList<CityBean> = ArrayList()
+    var listTwo: ArrayList<City> = ArrayList()
     //        by lazy {
-//        mutableListOf<CityBean>()
+//        mutableListOf<City>()
 //    }
     @State
     var rv_state0: Parcelable? = null
@@ -61,11 +61,11 @@ class  MainActivity : AppCompatActivity() {
                     .addConverterFactory(GsonConverterFactory.create())
                     .build().let {
                         val cityList = it.create(GistService::class.java).getCityList()
-                        cityList.enqueue(object : Callback<List<CityBean>?> {
-                            override fun onFailure(call: Call<List<CityBean>?>?, t: Throwable?) {
+                        cityList.enqueue(object : Callback<List<City>?> {
+                            override fun onFailure(call: Call<List<City>?>?, t: Throwable?) {
                             }
 
-                            override fun onResponse(call: Call<List<CityBean>?>?, response: Response<List<CityBean>?>?) {
+                            override fun onResponse(call: Call<List<City>?>?, response: Response<List<City>?>?) {
                                 response?.body().apply {
                                     this?.forEach {
                                         if (it.rank.toInt()<500){

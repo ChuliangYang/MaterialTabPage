@@ -18,7 +18,7 @@ import com.evernote.android.state.State
 import com.evernote.android.state.StateSaver
 import com.me.cl.materialtabhost.R
 import com.me.cl.materialtabhost.adapter.CityAdapter
-import com.me.cl.materialtabhost.bean.CityBean
+import com.me.cl.materialtabhost.bean.entities.City
 import com.me.cl.materialtabhost.MVP.base.DaggerMainComponent
 import com.me.cl.materialtabhost.MVP.base.MainModule
 import com.me.cl.materialtabhost.MVP.base.MainPresenter
@@ -86,7 +86,7 @@ class MainActivityMVP : AppCompatActivity(), MainView {
         presenter.destroy()
     }
 
-    override fun bindToViewPager(twoList: List<List<CityBean>>) {
+    override fun bindToViewPager(twoList: List<List<City>>) {
         mvpCityList?.adapter = object : PagerAdapter() {
             override fun instantiateItem(container: ViewGroup, position: Int): Any {
                 val rv = LayoutInflater.from(baseContext).inflate(R.layout.recyclerview, container, false) as RecyclerView

@@ -3,7 +3,7 @@ package com.me.cl.materialtabhost.MVP
 import android.content.Context
 import android.os.Bundle
 import com.me.cl.materialtabhost.api.GistService
-import com.me.cl.materialtabhost.bean.CityBean
+import com.me.cl.materialtabhost.bean.entities.City
 import com.me.cl.materialtabhost.MVP.base.MainInteractor
 import io.reactivex.Observable
 import retrofit2.Retrofit
@@ -15,13 +15,13 @@ class MainInteractorImpl @Inject constructor(val context: Context, val retrofit:
 
     val stateCache = HashMap<String, Any?>()
 
-    override fun fetchCityList(): Observable<List<CityBean>> {
+    override fun fetchCityList(): Observable<List<City>> {
         return retrofit.create(GistService::class.java).getCityListRx().toObservable()
     }
 
-    override fun divideIntoTwoList(totalList: List<CityBean>): List<List<CityBean>> {
-        val listOne = mutableListOf<CityBean>()
-        val listTwo = mutableListOf<CityBean>()
+    override fun divideIntoTwoList(totalList: List<City>): List<List<City>> {
+        val listOne = mutableListOf<City>()
+        val listTwo = mutableListOf<City>()
 
         totalList.forEach {
             if (it.rank.toInt() < 500) {
@@ -31,7 +31,7 @@ class MainInteractorImpl @Inject constructor(val context: Context, val retrofit:
             }
         }
 
-        return mutableListOf<MutableList<CityBean>>().apply {
+        return mutableListOf<MutableList<City>>().apply {
             add(listOne)
             add(listTwo)
         }
@@ -49,12 +49,12 @@ class MainInteractorImpl @Inject constructor(val context: Context, val retrofit:
         var isRestore = false
 
         outState?.apply {
-            outState.getParcelableArrayList<CityBean>(STATE_RV_MODEL_0).let {
+            outState.getParcelableArrayList<City>(STATE_RV_MODEL_0).let {
                 stateCache.put(STATE_RV_MODEL_0, it)
                 if (size() > 0) isRestore = true
 
             }
-            outState.getParcelableArrayList<CityBean>(STATE_RV_MODEL_1).let {
+            outState.getParcelableArrayList<City>(STATE_RV_MODEL_1).let {
                 stateCache.put(STATE_RV_MODEL_1, it)
                 if (size() > 0) isRestore = true
             }
@@ -65,8 +65,8 @@ class MainInteractorImpl @Inject constructor(val context: Context, val retrofit:
     override fun saveWholeState(outState: Bundle) {
         stateCache.forEach {
             when (it.key) {
-                STATE_RV_MODEL_0 -> outState.putParcelableArrayList(it.key, it.value as ArrayList<CityBean>)
-                STATE_RV_MODEL_1 -> outState.putParcelableArrayList(it.key, it.value as ArrayList<CityBean>)
+                STATE_RV_MODEL_0 -> outState.putParcelableArrayList(it.key, it.value as ArrayList<City>)
+                STATE_RV_MODEL_1 -> outState.putParcelableArrayList(it.key, it.value as ArrayList<City>)
             }
         }
     }

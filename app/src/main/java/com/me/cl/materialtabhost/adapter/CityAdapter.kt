@@ -8,9 +8,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.me.cl.materialtabhost.R
 
-import com.me.cl.materialtabhost.bean.CityBean
+import com.me.cl.materialtabhost.bean.entities.City
 
-class CityAdapter(val context: Context,val cityBeanList: List<CityBean>?) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class CityAdapter(val context: Context,val cityList: List<City>?) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return CityHolder(LayoutInflater.from(context).inflate(R.layout.item_city,parent, false))
@@ -19,7 +19,7 @@ class CityAdapter(val context: Context,val cityBeanList: List<CityBean>?) : Recy
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is CityHolder ){
             holder.apply {
-                cityBeanList?.let {
+                cityList?.let {
                     tv_city.text = it[position].city
                     tv_state.text = it[position].state
                     tv_population.text = it[position].population
@@ -31,7 +31,7 @@ class CityAdapter(val context: Context,val cityBeanList: List<CityBean>?) : Recy
     }
 
     override fun getItemCount(): Int {
-        return cityBeanList?.size ?: 0
+        return cityList?.size ?: 0
     }
 
     inner class CityHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

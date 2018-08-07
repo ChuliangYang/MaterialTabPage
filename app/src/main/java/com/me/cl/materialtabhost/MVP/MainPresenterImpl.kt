@@ -2,7 +2,7 @@ package com.me.cl.materialtabhost.MVP
 
 import android.arch.lifecycle.Lifecycle
 import android.os.Bundle
-import com.me.cl.materialtabhost.bean.CityBean
+import com.me.cl.materialtabhost.bean.entities.City
 import com.me.cl.materialtabhost.MVP.MainInteractorImpl.Companion.STATE_RV_MODEL_0
 import com.me.cl.materialtabhost.MVP.MainInteractorImpl.Companion.STATE_RV_MODEL_1
 import com.me.cl.materialtabhost.MVP.base.MainInteractor
@@ -21,15 +21,15 @@ class MainPresenterImpl @Inject constructor(val interactor: MainInteractor) : Ma
     override fun init(provider: LifecycleProvider<Lifecycle.Event>, savedInstanceState: Bundle?) {
         this.provider = provider
         if (interactor.restoreFromState(savedInstanceState)) {
-            view?.bindToViewPager(mutableListOf<List<CityBean>>().apply {
+            view?.bindToViewPager(mutableListOf<List<City>>().apply {
                 interactor.getState(STATE_RV_MODEL_0)?.let {
-                    add(it as List<CityBean>)
+                    add(it as List<City>)
                 } ?: apply {
                     add(arrayListOf())
                 }
 
                 interactor.getState(STATE_RV_MODEL_1)?.let {
-                    add(it as List<CityBean>)
+                    add(it as List<City>)
                 } ?: apply {
                     add(arrayListOf())
                 }
