@@ -7,14 +7,10 @@ import android.os.Parcel
 import android.os.Parcelable
 @Entity(tableName = "cities")
 data class City(val city: String,
-                @Ignore
                 val growth_from_2000_to_2013: String,
-                @Ignore
                 val latitude: Double,
-                @Ignore
                 val longitude: Double,
                 val population: String,
-                @Ignore
                 val rank: String,
                 val state: String) : Parcelable {
 

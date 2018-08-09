@@ -2,30 +2,64 @@ package com.me.cl.materialtabhost.MVVM.data.base
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MediatorLiveData
-import android.arch.lifecycle.Observer
+import io.reactivex.Completable
+import io.reactivex.schedulers.Schedulers
 
 // Use local database as SSOT, local data will sync with remote data
 abstract class RemoteSource<ResultType>{
-    val result = MediatorLiveData<Data<ResultType,*>>()
+    val result = MediatorLiveData<DataResource<ResultType>>()
     init {
-        result.value=Data.loading()
+        result.value=DataResource.loading()
         val dataSource=obtainFromLocal()
-        val remoteSource=obtainFromRemote()
         result.addSource(dataSource) {
             if(needFetch(it)){
-
+                fetchFromRemote(it)
             }else{
-
+                result.value=DataResource.success(it)
             }
         }
     }
 
-    fun toLiveData():LiveData<Data<ResultType,*>>{
+    private fun fetchFromRemote(dbResult:ResultType?) {
+        val temp = MediatorLiveData<NetworkResponse<ResultType>>()
+        val remoteSource=obtainFromRemote()
+        temp.addSource(remoteSource) { response ->
+            temp.removeSource(remoteSource)
+            when(response){
+                is ResponseSuccess->{
+                    onRemoteFetchSuccess()
+                    Completable.create {
+                        saveRemoteResult(processResponse(response))
+                        it.onComplete()
+                    }.subscribeOn(Schedulers.io()).subscribe()
+//                    result.value=DataResource.success(it.result)
+                }
+                is ResponseFailed->{
+                    onRemoteFetchFailed()
+                    result.value=DataResource.failed(response.errorMessage,dbResult)
+                }
+            }
+        }
+    }
+
+    fun toLiveData():LiveData<DataResource<ResultType>>{
         return result
     }
 
-    abstract fun obtainFromRemote():LiveData<ResultType>
+    open fun onRemoteFetchSuccess(){
+
+    }
+    open fun onRemoteFetchFailed(){
+
+    }
+
+    open fun processResponse(response:ResponseSuccess<ResultType>):ResultType?{
+        return response.result
+    }
+
+    abstract fun obtainFromRemote():LiveData<NetworkResponse<ResultType>>
     abstract fun obtainFromLocal():LiveData<ResultType>
+    abstract fun saveRemoteResult(result:ResultType?)
     abstract fun needFetch(data:ResultType?):Boolean
 
 }
