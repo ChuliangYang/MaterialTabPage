@@ -5,7 +5,7 @@
     <data>
         <variable
             name="city"
-            type="com.me.cl.materialtabhost.bean.entities.City"/>
+            type="com.me.cl.materialtabhost.data.entities.City"/>
     </data>
 <android.support.constraint.ConstraintLayout
     android:background="@android:color/white"

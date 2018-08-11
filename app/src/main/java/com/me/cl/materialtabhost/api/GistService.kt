@@ -1,8 +1,8 @@
 package com.me.cl.materialtabhost.api
 
 import android.arch.lifecycle.LiveData
-import com.me.cl.materialtabhost.MVVM.data.base.NetworkResponse
-import com.me.cl.materialtabhost.bean.entities.City
+import com.me.cl.materialtabhost.mvvm.data.base.NetworkResponse
+import com.me.cl.materialtabhost.data.entities.City
 import io.reactivex.Single
 import retrofit2.Call
 import retrofit2.http.GET

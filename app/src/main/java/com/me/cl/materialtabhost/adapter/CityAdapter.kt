@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.me.cl.materialtabhost.R
 
-import com.me.cl.materialtabhost.bean.entities.City
+import com.me.cl.materialtabhost.data.entities.City
 
 class CityAdapter(val context: Context,val cityList: List<City>?) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 

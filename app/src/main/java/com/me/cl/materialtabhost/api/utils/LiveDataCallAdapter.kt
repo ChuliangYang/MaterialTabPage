@@ -2,7 +2,7 @@ package com.android.example.github.util
 
 
 import android.arch.lifecycle.LiveData
-import com.me.cl.materialtabhost.MVVM.data.base.NetworkResponse
+import com.me.cl.materialtabhost.mvvm.data.base.NetworkResponse
 import retrofit2.Call
 import retrofit2.CallAdapter
 import retrofit2.Callback
