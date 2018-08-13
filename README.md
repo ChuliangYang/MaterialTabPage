@@ -17,6 +17,7 @@ Data from [Json](https://gist.githubusercontent.com/MrCarlosYang/c1f004cb7f447ee
 * RxAndroid
 * RxLifeCycle
 * Architecture Component
+* Room
 * Data Binding
 * Retrofit
 * Okhttp
