@@ -2,11 +2,13 @@ package com.me.cl.materialtabhost.mvvm.data.transform.base
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
+import android.support.annotation.WorkerThread
 import com.me.cl.materialtabhost.mvvm.data.base.DataResource
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 
 object ReactUtil {
+    @WorkerThread
     fun <T> toLiveDataResource(dataProducer: () -> T): LiveData<DataResource<T>> {
         val temp = MutableLiveData<DataResource<T>>()
         Single.create<DataResource<T>> {

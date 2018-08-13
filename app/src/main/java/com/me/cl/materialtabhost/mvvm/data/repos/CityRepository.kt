@@ -48,7 +48,7 @@ class CityRepository @Inject constructor(val localSource: CityLocalSource, val r
      }
 
     fun getTitle():LiveData<DataResource<String>>{
-            title.value= DataResource.success("test title")
+//            title.value= DataResource.success("test title")
 //            if(rxCache.containsValue()){
                 Observable.interval(1, TimeUnit.SECONDS).observeOn(AndroidSchedulers.mainThread()).subscribe {
                     title.value=DataResource.success("test title${it}")
