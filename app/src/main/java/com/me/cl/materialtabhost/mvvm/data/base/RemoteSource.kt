@@ -21,10 +21,9 @@ abstract class RemoteSource<ResultType>{
     }
 
     private fun fetchFromRemote(dbResult:ResultType?) {
-        val temp = MediatorLiveData<NetworkResponse<ResultType>>()
         val remoteSource=obtainFromRemote()
-        temp.addSource(remoteSource) { response ->
-            temp.removeSource(remoteSource)
+        result.addSource(remoteSource){ response ->
+            result.removeSource(remoteSource)
             when(response){
                 is ResponseSuccess->{
                     onRemoteFetchSuccess()
@@ -32,7 +31,6 @@ abstract class RemoteSource<ResultType>{
                         saveRemoteResult(processResponse(response))
                         it.onComplete()
                     }.subscribeOn(Schedulers.io()).subscribe()
-//                    result.value=DataResource.success(it.result)
                 }
                 is ResponseFailed->{
                     onRemoteFetchFailed()

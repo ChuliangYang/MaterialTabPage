@@ -36,9 +36,9 @@ class CityListFragment:Fragment(), Injectable {
                 vp_city_list.adapter=CityListPageAdapter(this)
             }
         })
-        viewModel.getTitle().observe(this, Observer {
-            titlebar.title=it?.original
-        })
+            viewModel.getTitle().observe(this, Observer {
+                titlebar.title=it?.original
+            })
     }
 
    companion object {

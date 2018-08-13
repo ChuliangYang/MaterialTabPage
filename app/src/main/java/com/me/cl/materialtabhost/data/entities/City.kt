@@ -8,19 +8,12 @@ import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "cities")
 data class City(
-        @field:SerializedName("city")
         val city: String,
-        @field:SerializedName("growth_from_2000_to_2013")
         val growth_from_2000_to_2013: String,
-        @field:SerializedName("latitude")
         val latitude: Double,
-        @field:SerializedName("longitude")
         val longitude: Double,
-        @field:SerializedName("population")
         val population: String,
-        @field:SerializedName("rank")
         val rank: String,
-        @field:SerializedName("state")
         val state: String) : Parcelable {
 
     @PrimaryKey(autoGenerate = true)

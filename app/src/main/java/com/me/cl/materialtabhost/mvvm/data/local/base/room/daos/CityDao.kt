@@ -2,6 +2,7 @@ package com.me.cl.materialtabhost.mvvm.data.local.base.room.daos
 
 import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.*
+import android.support.annotation.Nullable
 import com.me.cl.materialtabhost.data.entities.City
 
 
