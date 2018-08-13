@@ -2,6 +2,7 @@ package com.me.cl.materialtabhost.mvvm.data.base
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MediatorLiveData
+import android.arch.lifecycle.Observer
 import io.reactivex.Completable
 import io.reactivex.schedulers.Schedulers
 
@@ -11,11 +12,14 @@ abstract class RemoteSource<ResultType>{
     init {
         result.value=DataResource.loading()
         val dataSource=obtainFromLocal()
-        result.addSource(dataSource) {
-            if(needFetch(it)){
-                fetchFromRemote(it)
+        result.addSource(dataSource) { data ->
+            result.removeSource(dataSource)
+            if(needFetch(data)){
+                fetchFromRemote(data)
             }else{
-                result.value=DataResource.success(it)
+                result.addSource(dataSource) {
+                    result.value=DataResource.success(it)
+                }
             }
         }
     }
@@ -36,6 +40,9 @@ abstract class RemoteSource<ResultType>{
                     onRemoteFetchFailed()
                     result.value=DataResource.failed(response.errorMessage,dbResult)
                 }
+            }
+            result.addSource(obtainFromLocal()) {
+                result.value=DataResource.success(it)
             }
         }
     }
