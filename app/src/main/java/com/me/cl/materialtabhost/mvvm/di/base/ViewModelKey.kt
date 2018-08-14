@@ -1,4 +1,4 @@
-package com.me.cl.materialtabhost.mvvm.di
+package com.me.cl.materialtabhost.mvvm.di.base
 
 import android.arch.lifecycle.ViewModel
 import dagger.MapKey

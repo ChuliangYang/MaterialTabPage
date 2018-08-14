@@ -1,4 +1,4 @@
-package com.me.cl.materialtabhost.mvvm.di
+package com.me.cl.materialtabhost.mvvm.di.base
 
 import javax.inject.Scope
 

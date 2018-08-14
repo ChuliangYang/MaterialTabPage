@@ -8,6 +8,7 @@ import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 
 object ReactUtil {
+    
     @WorkerThread
     fun <T> toLiveDataResource(dataProducer: () -> T): LiveData<DataResource<T>> {
         val temp = MutableLiveData<DataResource<T>>()

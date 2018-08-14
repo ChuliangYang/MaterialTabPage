@@ -1,8 +1,11 @@
-package com.me.cl.materialtabhost.mvvm.data.base
+package com.me.cl.materialtabhost.mvvm.data.remote.base
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MediatorLiveData
-import android.arch.lifecycle.Observer
+import com.me.cl.materialtabhost.mvvm.data.base.DataResource
+import com.me.cl.materialtabhost.mvvm.data.base.NetworkResponse
+import com.me.cl.materialtabhost.mvvm.data.base.ResponseFailed
+import com.me.cl.materialtabhost.mvvm.data.base.ResponseSuccess
 import io.reactivex.Completable
 import io.reactivex.schedulers.Schedulers
 
@@ -10,7 +13,7 @@ import io.reactivex.schedulers.Schedulers
 abstract class RemoteSource<ResultType>{
     val result = MediatorLiveData<DataResource<ResultType>>()
     init {
-        result.value=DataResource.loading()
+        result.value= DataResource.loading()
         val dataSource=obtainFromLocal()
         result.addSource(dataSource) { data ->
             result.removeSource(dataSource)
@@ -18,7 +21,7 @@ abstract class RemoteSource<ResultType>{
                 fetchFromRemote(data)
             }else{
                 result.addSource(dataSource) {
-                    result.value=DataResource.success(it)
+                    result.value= DataResource.success(it)
                 }
             }
         }
@@ -29,20 +32,20 @@ abstract class RemoteSource<ResultType>{
         result.addSource(remoteSource){ response ->
             result.removeSource(remoteSource)
             when(response){
-                is ResponseSuccess->{
+                is ResponseSuccess ->{
                     onRemoteFetchSuccess()
                     Completable.create {
                         saveRemoteResult(processResponse(response))
                         it.onComplete()
                     }.subscribeOn(Schedulers.io()).subscribe()
                 }
-                is ResponseFailed->{
+                is ResponseFailed ->{
                     onRemoteFetchFailed()
-                    result.value=DataResource.failed(response.errorMessage,dbResult)
+                    result.value= DataResource.failed(response.errorMessage, dbResult)
                 }
             }
             result.addSource(obtainFromLocal()) {
-                result.value=DataResource.success(it)
+                result.value= DataResource.success(it)
             }
         }
     }
@@ -58,7 +61,7 @@ abstract class RemoteSource<ResultType>{
 
     }
 
-    open fun processResponse(response:ResponseSuccess<ResultType>):ResultType?{
+    open fun processResponse(response: ResponseSuccess<ResultType>):ResultType?{
         return response.result
     }
 

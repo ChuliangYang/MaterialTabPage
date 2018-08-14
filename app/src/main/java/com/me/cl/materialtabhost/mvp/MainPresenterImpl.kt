@@ -20,15 +20,15 @@ class MainPresenterImpl @Inject constructor(val interactor: MainInteractor) : Ma
 
     override fun init(provider: LifecycleProvider<Lifecycle.Event>, savedInstanceState: Bundle?) {
         this.provider = provider
-        if (interactor.restoreFromState(savedInstanceState)) {
+        if (interactor.restoreState(savedInstanceState)) {
             view?.bindToViewPager(mutableListOf<List<City>>().apply {
-                interactor.getState(STATE_RV_MODEL_0)?.let {
+                interactor.getCache(STATE_RV_MODEL_0)?.let {
                     add(it as List<City>)
                 } ?: apply {
                     add(arrayListOf())
                 }
 
-                interactor.getState(STATE_RV_MODEL_1)?.let {
+                interactor.getCache(STATE_RV_MODEL_1)?.let {
                     add(it as List<City>)
                 } ?: apply {
                     add(arrayListOf())
@@ -39,8 +39,8 @@ class MainPresenterImpl @Inject constructor(val interactor: MainInteractor) : Ma
                 interactor.divideIntoTwoList(it)
             }.observeOn(AndroidSchedulers.mainThread()).compose(provider.bindToLifecycle()).subscribe {
                 view?.bindToViewPager(it)
-                interactor.saveState(STATE_RV_MODEL_0, it[0])
-                interactor.saveState(STATE_RV_MODEL_1, it[1])
+                interactor.cached(STATE_RV_MODEL_0, it[0])
+                interactor.cached(STATE_RV_MODEL_1, it[1])
             }
         }
     }
@@ -50,7 +50,7 @@ class MainPresenterImpl @Inject constructor(val interactor: MainInteractor) : Ma
     }
 
     override fun saveState(outState: Bundle) {
-        interactor.saveWholeState(outState)
+        interactor.saveState(outState)
     }
 
     override fun destroy() {

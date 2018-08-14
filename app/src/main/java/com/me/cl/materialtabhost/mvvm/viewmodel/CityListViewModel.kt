@@ -6,16 +6,16 @@ import com.me.cl.materialtabhost.data.entities.City
 import com.me.cl.materialtabhost.mvvm.data.base.DataResource
 import com.me.cl.materialtabhost.mvvm.data.base.NullLiveData
 import com.me.cl.materialtabhost.mvvm.data.repos.CityRepository
-import com.me.cl.materialtabhost.mvvm.viewmodel.base.MyViewModel
+import com.me.cl.materialtabhost.mvvm.viewmodel.base.BaseViewModel
 import com.me.cl.materialtabhost.mvvm.viewmodel.base.reuseWhenAlive
 import javax.inject.Inject
 
-class CityListViewModel @Inject constructor(val repo: CityRepository) : MyViewModel() {
+class CityListViewModel @Inject constructor(private val repository: CityRepository) : BaseViewModel(repository) {
     fun getTwoCityList(): LiveData<DataResource<Array<List<City>>>> {
         return reuseWhenAlive {
-            switchMap(repo.cities) { input ->
+            switchMap(repository.cities) { input ->
                 input.original?.let {
-                    repo.divideIntoTwoList(it)
+                    repository.divideIntoTwoList(it)
                 } ?: let {
                     NullLiveData.create<DataResource<Array<List<City>>>>()
                 }
@@ -25,7 +25,7 @@ class CityListViewModel @Inject constructor(val repo: CityRepository) : MyViewMo
 
     fun getTitle(): LiveData<DataResource<String>> {
         return reuseWhenAlive("test") {
-            repo.getTitle()
+            repository.getTitle()
         }
     }
 }

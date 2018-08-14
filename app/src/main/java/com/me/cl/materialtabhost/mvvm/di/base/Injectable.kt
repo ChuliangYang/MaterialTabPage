@@ -1,4 +1,4 @@
-package com.me.cl.materialtabhost.mvvm.di
+package com.me.cl.materialtabhost.mvvm.di.base
 
 /**
  * Marks an activity / fragment injectable.

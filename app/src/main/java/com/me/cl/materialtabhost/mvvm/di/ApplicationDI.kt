@@ -49,7 +49,6 @@ class AppModule {
     }
 }
 
-@Suppress("unused")
 @Singleton
 @Component(modules = [
     AndroidSupportInjectionModule::class,

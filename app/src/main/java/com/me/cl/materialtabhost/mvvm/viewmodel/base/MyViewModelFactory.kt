@@ -1,10 +1,9 @@
-package com.me.cl.materialtabhost.mvvm.viewmodel
+package com.me.cl.materialtabhost.mvvm.viewmodel.base
 
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import javax.inject.Inject
 import javax.inject.Provider
-import javax.inject.Singleton
 
 class MyViewModelFactory @Inject constructor(
         private val creators: Map<Class<out ViewModel>, @JvmSuppressWildcards Provider<ViewModel>>

@@ -5,18 +5,19 @@ import android.arch.lifecycle.MutableLiveData
 import com.me.cl.materialtabhost.data.entities.City
 import com.me.cl.materialtabhost.mvvm.data.base.DataResource
 import com.me.cl.materialtabhost.mvvm.data.base.NetworkResponse
-import com.me.cl.materialtabhost.mvvm.data.base.RemoteSource
+import com.me.cl.materialtabhost.mvvm.data.remote.base.RemoteSource
 import com.me.cl.materialtabhost.mvvm.data.local.protocol.CityLocalSource
 import com.me.cl.materialtabhost.mvvm.data.remote.protocol.CityRemoteSource
+import com.me.cl.materialtabhost.mvvm.data.repos.base.RxReopsitory
+import com.me.cl.materialtabhost.mvvm.data.repos.base.autoDispose
 import com.me.cl.materialtabhost.mvvm.data.transform.base.ReactUtil
 import com.me.cl.materialtabhost.mvvm.data.transform.protocol.CityTransformer
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
-class CityRepository @Inject constructor(val localSource: CityLocalSource, val remoteSource: CityRemoteSource, val transformer: CityTransformer) {
+class CityRepository @Inject constructor(val localSource: CityLocalSource, val remoteSource: CityRemoteSource, val transformer: CityTransformer): RxReopsitory() {
     val title = MutableLiveData<DataResource<String>>()
     val cities: LiveData<DataResource<List<City>>>
         get() {
@@ -49,10 +50,9 @@ class CityRepository @Inject constructor(val localSource: CityLocalSource, val r
 
     fun getTitle(): LiveData<DataResource<String>> {
         title.value = DataResource.success("test title")
-        Observable.interval(1, TimeUnit.SECONDS).observeOn(AndroidSchedulers.mainThread()).subscribe {
+        autoDispose(Observable.interval(1, TimeUnit.SECONDS).observeOn(AndroidSchedulers.mainThread()).subscribe {
             title.value = DataResource.success("test title${it}")
-        }
+        })
         return title
     }
-
 }

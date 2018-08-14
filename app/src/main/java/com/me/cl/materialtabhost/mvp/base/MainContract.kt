@@ -20,9 +20,9 @@ interface MainPresenter {
 interface MainInteractor {
     fun fetchCityList(): Observable<List<City>>
     fun divideIntoTwoList(totalList: List<City>): List<List<City>>
-    fun saveState(key: String, state: Any?)
-    fun saveWholeState(outState: Bundle)
-    fun restoreFromState(outState: Bundle?): Boolean
-    fun getState(key: String): Any?
+    fun cached(key: String, state: Any?)
+    fun saveState(outState: Bundle)
+    fun restoreState(outState: Bundle?): Boolean
+    fun getCache(key: String): Any?
     fun release()
 }

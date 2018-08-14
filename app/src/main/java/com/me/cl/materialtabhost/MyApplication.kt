@@ -2,7 +2,7 @@ package com.me.cl.materialtabhost
 
 import android.app.Activity
 import android.app.Application
-import com.me.cl.materialtabhost.mvvm.di.DaggerAutoInjector
+import com.me.cl.materialtabhost.mvvm.di.base.DaggerAutoInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
 import javax.inject.Inject

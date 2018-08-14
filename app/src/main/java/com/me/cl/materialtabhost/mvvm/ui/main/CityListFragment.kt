@@ -13,8 +13,8 @@ import android.view.ViewGroup
 import com.me.cl.materialtabhost.R
 import com.me.cl.materialtabhost.adapter.CityAdapterBind
 import com.me.cl.materialtabhost.data.entities.City
-import com.me.cl.materialtabhost.mvvm.di.Injectable
-import com.me.cl.materialtabhost.mvvm.utils.ViewStatePagerAdapter
+import com.me.cl.materialtabhost.mvvm.di.base.Injectable
+import com.me.cl.materialtabhost.mvvm.widgets.ViewStatePagerAdapter
 import com.me.cl.materialtabhost.mvvm.utils.autoCleared
 import com.me.cl.materialtabhost.mvvm.viewmodel.CityListViewModel
 import kotlinx.android.synthetic.main.fragment_city_list.*

@@ -37,15 +37,15 @@ class MainInteractorImpl @Inject constructor(val context: Context, val retrofit:
         }
     }
 
-    override fun saveState(key: String, state: Any?) {
+    override fun cached(key: String, state: Any?) {
         stateCache[key] = state
     }
 
-    override fun getState(key: String): Any? {
+    override fun getCache(key: String): Any? {
         return stateCache[key]
     }
 
-    override fun restoreFromState(outState: Bundle?): Boolean {
+    override fun restoreState(outState: Bundle?): Boolean {
         var isRestore = false
 
         outState?.apply {
@@ -62,7 +62,7 @@ class MainInteractorImpl @Inject constructor(val context: Context, val retrofit:
         return isRestore
     }
 
-    override fun saveWholeState(outState: Bundle) {
+    override fun saveState(outState: Bundle) {
         stateCache.forEach {
             when (it.key) {
                 STATE_RV_MODEL_0 -> outState.putParcelableArrayList(it.key, it.value as ArrayList<City>)

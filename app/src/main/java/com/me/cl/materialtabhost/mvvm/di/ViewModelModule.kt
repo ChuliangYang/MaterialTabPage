@@ -10,8 +10,9 @@ import com.me.cl.materialtabhost.mvvm.data.remote.protocol.CityRemoteSource
 import com.me.cl.materialtabhost.mvvm.data.remote.strategy.CityRemoteSourceImpl
 import com.me.cl.materialtabhost.mvvm.data.transform.protocol.CityTransformer
 import com.me.cl.materialtabhost.mvvm.data.transform.strategy.CityTransformerImpl
+import com.me.cl.materialtabhost.mvvm.di.base.ViewModelKey
 import com.me.cl.materialtabhost.mvvm.viewmodel.CityListViewModel
-import com.me.cl.materialtabhost.mvvm.viewmodel.MyViewModelFactory
+import com.me.cl.materialtabhost.mvvm.viewmodel.base.MyViewModelFactory
 import dagger.Binds
 import dagger.Module
 import dagger.Provides

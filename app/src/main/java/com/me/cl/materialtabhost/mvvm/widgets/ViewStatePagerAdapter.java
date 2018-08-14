@@ -1,4 +1,4 @@
-package com.me.cl.materialtabhost.mvvm.utils;
+package com.me.cl.materialtabhost.mvvm.widgets;
 
 import android.os.Parcel;
 import android.os.Parcelable;
