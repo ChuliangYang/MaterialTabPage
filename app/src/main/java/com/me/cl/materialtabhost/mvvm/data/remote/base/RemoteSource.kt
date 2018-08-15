@@ -6,8 +6,7 @@ import com.me.cl.materialtabhost.mvvm.data.base.DataResource
 import com.me.cl.materialtabhost.mvvm.data.base.NetworkResponse
 import com.me.cl.materialtabhost.mvvm.data.base.ResponseFailed
 import com.me.cl.materialtabhost.mvvm.data.base.ResponseSuccess
-import io.reactivex.Completable
-import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.experimental.async
 
 // Use local database as SSOT, local data will sync with remote data
 abstract class RemoteSource<ResultType>{
@@ -34,10 +33,13 @@ abstract class RemoteSource<ResultType>{
             when(response){
                 is ResponseSuccess ->{
                     onRemoteFetchSuccess()
-                    Completable.create {
+                    async{
                         saveRemoteResult(processResponse(response))
-                        it.onComplete()
-                    }.subscribeOn(Schedulers.io()).subscribe()
+                    }
+//                    Completable.create {
+//                        saveRemoteResult(processResponse(response))
+//                        it.onComplete()
+//                    }.subscribeOn(Schedulers.io()).subscribe()
                 }
                 is ResponseFailed ->{
                     onRemoteFetchFailed()
