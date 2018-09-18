@@ -4,13 +4,9 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import com.me.cl.materialtabhost.R
-import com.me.cl.materialtabhost.mvvm.data.local.base.room.AppDatabase
 import com.me.cl.materialtabhost.mvvm.di.base.Injectable
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
-import io.reactivex.Completable
-import io.reactivex.schedulers.Schedulers
-import kotlinx.coroutines.experimental.async
 import javax.inject.Inject
 
 class MainActivityMVVM:AppCompatActivity(),HasSupportFragmentInjector, Injectable {
