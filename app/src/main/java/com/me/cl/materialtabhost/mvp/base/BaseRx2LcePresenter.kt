@@ -14,20 +14,11 @@ abstract class BaseRx2LcePresenter<V : MvpLceView<M>, M> : com.hannesdorfmann.mo
 
     protected var disposal: Disposable? = null
 
-    /**
-     * Unsubscribes the disposal and set it to null
-     */
     protected fun unsubscribe() {
         disposal?.dispose()
         disposal = null
     }
 
-    /**
-     * Subscribes the presenter himself as disposal on the observable
-     *
-     * @param observable The observable to subscribe
-     * @param pullToRefresh Pull to refresh?
-     */
     fun subscribe(observable: Observable<M>, pullToRefresh: Boolean) {
 
         if (isViewAttached) {

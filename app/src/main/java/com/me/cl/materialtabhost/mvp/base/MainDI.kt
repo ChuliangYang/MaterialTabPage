@@ -3,8 +3,6 @@ package com.me.cl.materialtabhost.mvp.base
 import android.content.Context
 import com.me.cl.materialtabhost.data.GIST_HOST
 import com.me.cl.materialtabhost.mvp.MainActivityMVP
-import com.me.cl.materialtabhost.mvp.MainInteractorImpl
-import com.me.cl.materialtabhost.mvp.MainPresenterImpl
 import dagger.Component
 import dagger.Module
 import dagger.Provides
@@ -15,24 +13,15 @@ import java.lang.annotation.Retention
 import java.lang.annotation.RetentionPolicy
 import javax.inject.Scope
 
-@Component(modules = arrayOf(MainModule::class))
+
+@Component(modules = arrayOf(MainMVPModule::class))
 @ActivityScope
-interface MainComponent {
+interface MainMVPComponent {
     fun inject(mainActivity: MainActivityMVP)
 }
 
 @Module
-class MainModule(val activity: MainActivityMVP) {
-
-    @Provides
-    fun provideMainPresenter(mainPresenterImpl: MainPresenterImpl): MainPresenter {
-        return mainPresenterImpl
-    }
-
-    @Provides
-    fun provideMainInteractor(mainInteractorImpl: MainInteractorImpl): MainInteractor {
-        return mainInteractorImpl
-    }
+class MainMVPModule(val activity: MainActivityMVP) {
 
     @Provides
     fun provideContext(): Context {
@@ -45,6 +34,7 @@ class MainModule(val activity: MainActivityMVP) {
         return Retrofit.Builder().baseUrl(GIST_HOST).addConverterFactory(GsonConverterFactory.create()).addCallAdapterFactory(RxJava2CallAdapterFactory.create()).build()
     }
 }
+
 
 @Scope
 @Retention(RetentionPolicy.RUNTIME)
