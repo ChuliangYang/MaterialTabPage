@@ -62,4 +62,6 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:0.24.0'
     // MVP + ViewState + LCE Views
     implementation 'com.hannesdorfmann.mosby3:mvp-lce:3.1.0'
+    // Model-View-Intent
+    implementation 'com.hannesdorfmann.mosby3:mvi:3.1.0'
 }
