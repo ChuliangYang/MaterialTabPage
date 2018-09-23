@@ -7,7 +7,7 @@ import io.reactivex.Observable
 import retrofit2.Retrofit
 import javax.inject.Inject
 
-class MainRepository @Inject constructor(val context: Context, val retrofit: Retrofit) {
+class MainRepository @Inject constructor(val retrofit: Retrofit) {
      fun fetchCityList(): Observable<List<City>> {
         return retrofit.create(GistService::class.java).getCityListRx().toObservable()
     }
