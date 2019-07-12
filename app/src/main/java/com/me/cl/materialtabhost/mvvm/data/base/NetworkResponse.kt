@@ -14,13 +14,13 @@ open class NetworkResponse<T> {
 
         fun <T> create(response: Response<T>):NetworkResponse<T>{
              return if(response.isSuccessful) {
-                ResponseSuccess(response.body())
+                 Success(response.body())
             }else {
                 var msg:String?=response.message()
                 if(msg.isNullOrEmpty()){
                     msg = response.errorBody().toString()
                 }
-                ResponseFailed(response.code(),msg?:"Unknown Error")
+                 Failed(response.code(),msg?:"Unknown Error")
             }
         }
 
